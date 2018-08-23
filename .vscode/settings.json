@@ -1,5 +1,15 @@
 {
+  "files.associations": {
+    ".eslintrc": "jsonc",
+    ".babelrc": "jsonc",
+    ".prettierrc": "jsonc"
+  },
+
   "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "typescript.validate.enable": false,
+  "typescript.format.enable": false,
+
   "flow.useNPMPackagedFlow": true,
   "search.exclude": {
     ".git": true,
@@ -15,5 +25,31 @@
     "npm-debug.log.*": true,
     "test/**/__snapshots__": true,
     "yarn.lock": true
-  }
+  },
+  "files.autoSave": "off",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.renderIndentGuides": true,
+  "editor.fontSize": 16,
+  "vsicons.projectDetection.autoReload": true,
+  // 控制编辑器是否可以滚动到最后一行之后
+  "editor.scrollBeyondLastLine": true,
+  "git.enableSmartCommit": true,
+  "workbench.iconTheme": "vscode-great-icons",
+  // 控制编辑器是否应在用户键入、粘贴或移动行时自动调整缩进。语言的缩进规则必须可用。
+  "editor.autoIndent": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  // Set the default
+  "editor.formatOnSave": false,
+  // Enable per-language
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "workbench.startupEditor": "welcomePage",
+  // Use 'prettier-eslint' instead of 'prettier'. Other settings will only be fallbacks in case they could not be inferred from eslint rules.
+  "prettier.eslintIntegration": true,
+  "git.autofetch": true,
+  "window.zoomLevel": 0,
+  "liveServer.settings.donotShowInfoMsg": true
+  // A list of languages IDs to disable this extension on
 }

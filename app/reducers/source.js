@@ -1,5 +1,6 @@
+// @flow
 export default function source(state = null, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'GETALLVIDEOSOURCE':
       return action.payload;
     default:
