@@ -1,10 +1,10 @@
 // @flow
 export default {
-  width: 1024,
-  height: 728,
+  width: 1200,
+  height: 800,
   center: true,
-  minWidth: 100,
-  minHeight: 50,
+  minWidth: 1200,
+  minHeight: 500,
   frame: false,
   autoHideMenuBar: true,
   titleBarStyle: 'customButtonsOnHover',

@@ -4,7 +4,6 @@ import { Icon, Button, Row, Popover } from 'antd';
 import { app, Menu, shell, BrowserWindow, remote } from 'electron';
 // import * as _ from 'lodash';
 import styles from './Menu_.css';
-import makeDraggable from '../../utils/dragjs/dragjs';
 
 console.log(6, app, Menu, shell, BrowserWindow, remote);
 const { getCurrentWindow } = remote;
@@ -68,10 +67,6 @@ class MenuList extends Component {
     window.addEventListener('resize', () => {
       this.setState({ menu: getMenuList() });
     });
-  }
-
-  componentDidMount() {
-    makeDraggable(document.getElementById('menu_'));
   }
 
   // 点着上面拖动窗口

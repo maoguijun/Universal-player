@@ -8,10 +8,6 @@ import styles from './Channel_.css';
 
 const MenuItem = Menu.Item;
 
-// const Channel = ({ channel, handleSwitchChannel }) => {
-//   const item = channel.map(d => <MenuItem key={d.url}>{d.name}</MenuItem>);
-//   return <Menu onSelect={handleSwitchChannel}>{item}</Menu>;
-// };
 class Channel extends Component {
   constructor(props) {
     super(props);

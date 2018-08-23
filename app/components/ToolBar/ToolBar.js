@@ -1,62 +1,71 @@
 // @flow
-import React from 'react';
+import React, { Component } from 'react';
 import { Icon, Select, Button, Dropdown, Menu } from 'antd';
+import * as _ from 'lodash';
 import MenuList from '../Menu/Menu';
+import makeDraggable from '../../utils/dragjs/dragjs';
 
 const { Option } = Select;
 
-const ToolBar = ({
-  onComeback,
-  onSwitchSource,
-  onSourceSelected,
-  freeUrl,
-  title
-}) => {
-  const menu = (
-    <div style={{ height: '50%', overflow: 'hidden' }}>
-      <Menu
-        onClick={e => {
-          onSwitchSource(e.item.props && e.item.props.value);
+class ToolBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    makeDraggable(document.getElementById('toolbar'));
+  }
+  /** 去重 */
+
+  uniqList = array => {
+    const arr = [];
+    array.forEach(item => {
+      if (arr.every(({ url }) => url !== item.url)) {
+        arr.push(item);
+      }
+    });
+    return arr;
+  };
+
+  getOptions = urllist => {
+    const list = this.uniqList(urllist);
+    const options = list.map(({ name, url }) => (
+      <Option key={name} value={url}>
+        {name}
+      </Option>
+    ));
+    return options;
+  };
+
+  render() {
+    const { onComeback, onSwitchSource, freeUrl, title } = this.props;
+    return (
+      <div
+        id="toolbar"
+        style={{
+          display: 'flex',
+          height: 68,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '5px 20px'
         }}
       >
-        {freeUrl.map(({ name, url }) => (
-          <Menu.Item key={name} value={url}>
-            {name}
-          </Menu.Item>
-        ))}
-      </Menu>
-    </div>
-  );
-  return (
-    <div
-      style={{
-        display: 'flex',
-        height: 68,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '5px 20px'
-      }}
-    >
-      <div>
-        <Button
-          type="rollback"
-          style={{ fontSize: '18px', cursor: 'pointer' }}
-          onClick={onComeback}
-        >
-          返回
-        </Button>
-      </div>
-      <span style={{ padding: '0 20px', color: 'darkcyan' }}>{title}</span>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Dropdown overlay={menu} trigger={['click']}>
-          <Button style={{ marginLeft: 8 }}>
-            选择vip线路 <Icon type="down" />
+        <div>
+          <Button type="rollback" onClick={onComeback}>
+            返回
           </Button>
-        </Dropdown>
+        </div>
+        <span style={{ padding: '0 20px', color: 'darkcyan' }}>{title}</span>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Select onSelect={onSwitchSource} style={{ width: 200 }}>
+            {this.getOptions(freeUrl)}
+          </Select>
+        </div>
+        <MenuList />
       </div>
-      <MenuList />
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default ToolBar;
