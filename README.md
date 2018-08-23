@@ -160,7 +160,7 @@ See [#118](https://github.com/chentsulin/electron-react-boilerplate/issues/118) 
 If your application is a fork from this repo, you can add this repo to another git remote:
 
 ```sh
-git remote add upstream https://github.com/chentsulin/electron-react-boilerplate.git
+git remote add upstream https://github.com/maoguijun/Universal-player.git
 ```
 
 Then, use git to merge some latest commits:
