@@ -3,12 +3,12 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import routes from './constants/routes.json';
 import App from './containers/App';
-// import Menu from './components/Menu/Menu';
+import MenuList from './components/Menu/Menu';
 import Video from './containers/Video';
 
 export default () => (
   <App>
-    {/* <Menu /> */}
+    <MenuList />
     <Switch>
       <Route path={routes.COUNTER} component={Video} />
     </Switch>

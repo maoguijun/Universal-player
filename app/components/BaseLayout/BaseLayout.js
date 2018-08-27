@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Layout } from 'antd';
+import { Layout, Button, Icon, Row } from 'antd';
 
 import Channel from '../channel/Channel';
 import ToolBar from '../ToolBar/ToolBar';
@@ -37,7 +37,36 @@ class BaseLayout extends Component {
     const { collapsed } = this.state;
     return (
       <Layout className={styles.baceL}>
-        <Sider theme="light" trigger={null} collapsible collapsed={collapsed}>
+        <Row
+          style={{
+            width: collapsed ? 81 : 180,
+            position: 'fixed',
+            zIndex: 999,
+            top: 0,
+            paddintTop: 5,
+            background: '#fff'
+          }}
+        >
+          <Button
+            onClick={this.toggleCollapsed}
+            className={collapsed ? styles.toggleBtnColl : styles.toggleBtn}
+          >
+            <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
+          </Button>
+        </Row>
+        <Sider
+          theme="light"
+          style={{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0
+          }}
+          width={180}
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+        >
           <Channel
             toggleCollapsed={this.toggleCollapsed}
             channel={channel}
@@ -45,7 +74,11 @@ class BaseLayout extends Component {
             handleSwitchChannel={handleSwitchChannel}
           />
         </Sider>
-        <Layout>
+        <Layout
+          className={
+            collapsed ? styles.Layoutcollapsed : styles.Layoutnotcollapsed
+          }
+        >
           <ToolBar
             onComeback={onComeback}
             onSwitchSource={onSwitchSource}

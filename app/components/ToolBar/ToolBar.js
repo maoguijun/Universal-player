@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import { Icon, Select, Button, Dropdown, Menu } from 'antd';
 import * as _ from 'lodash';
-import MenuList from '../Menu/Menu';
-import makeDraggable from '../../utils/dragjs/dragjs';
 
 const { Option } = Select;
 
@@ -12,11 +10,6 @@ class ToolBar extends Component {
     super(props);
     this.state = {};
   }
-
-  componentDidMount() {
-    makeDraggable(document.getElementById('toolbar'));
-  }
-  /** 去重 */
 
   uniqList = array => {
     const arr = [];
@@ -45,7 +38,7 @@ class ToolBar extends Component {
         id="toolbar"
         style={{
           display: 'flex',
-          height: 68,
+          height: 48,
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '5px 20px'
@@ -62,7 +55,7 @@ class ToolBar extends Component {
             {this.getOptions(freeUrl)}
           </Select>
         </div>
-        <MenuList />
+        <div style={{ width: 140 }} />
       </div>
     );
   }

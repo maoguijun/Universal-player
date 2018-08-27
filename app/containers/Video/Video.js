@@ -19,6 +19,14 @@ class VideoPlay extends PureComponent<Props> {
     };
   }
 
+  // WARNING! To be deprecated in React v17. Use componentDidMount instead.
+  componentWillMount() {
+    const url = localStorage.getItem('menukey');
+    if (url) {
+      this.setState({ url });
+    }
+  }
+
   componentDidMount() {
     const { getAllVideoSource } = this.props;
     const { myWebview } = this;
@@ -48,8 +56,8 @@ class VideoPlay extends PureComponent<Props> {
     }
   }
 
-  handleSwitchChannel = value => {
-    this.setState({ url: value.key });
+  handleSwitchChannel = url => {
+    this.setState({ url });
   };
 
   setTitle = () => {
@@ -63,7 +71,9 @@ class VideoPlay extends PureComponent<Props> {
 
   onSwitchSource = url => {
     const currentVideoUrl = this.myWebview.getURL();
+    console.log(74, currentVideoUrl);
     this.setState({ url: `${url}${currentVideoUrl}` });
+    console.log(75, `${url}${currentVideoUrl}`);
   };
 
   render() {

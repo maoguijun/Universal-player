@@ -4,6 +4,7 @@ import { Icon, Button, Row, Popover } from 'antd';
 import { app, Menu, shell, BrowserWindow, remote } from 'electron';
 // import * as _ from 'lodash';
 import styles from './Menu_.css';
+import makeDraggable from '../../utils/dragjs/dragjs';
 
 console.log(6, app, Menu, shell, BrowserWindow, remote);
 const { getCurrentWindow } = remote;
@@ -51,7 +52,9 @@ const getMenuList = () => {
   ].filter(({ show }) => show);
   return menu;
 };
-
+/**
+ * 这实际上是右上角的三个功能按键
+ */
 class MenuList extends Component {
   constructor(props) {
     super(props);
@@ -69,55 +72,29 @@ class MenuList extends Component {
     });
   }
 
-  // 点着上面拖动窗口
-  // dragWindow = e => {
-  //   window.dragObj = {
-  //     ...window.dragObj,
-  //     mouseX: e.clientX,
-  //     mouseY: e.clientY
-  //   };
-  //   if (!window.dragObj.drag) {
-  //     return;
-  //   }
-  //   window.moveTo(
-  //     e.screenX - window.dragObj.clickX,
-  //     e.screenY - window.dragObj.clickY
-  //   );
-  // };
-  // startDragToggle = drag => {
-  //   window.dragObj = {
-  //     ...window.dragObj,
-  //     drag,
-  //     clickX: window.dragObj.mouseX,
-  //     clickY: window.dragObj.mouseY
-  //   };
-  // };
+  componentDidMount() {
+    makeDraggable(document.getElementById('toolbar'));
+  }
+
   render() {
     const { menu } = this.state;
     return (
-      <Row
-        id="menu_"
-        {...this.props}
-        className={styles.menu}
-        // onMouseDown={() => this.startDragToggle(true)}
-        // onMouseUp={() => this.startDragToggle(false)}
-        // onMouseMove={this.dragWindow}
-        // onMouseEnter={() => this.startDragToggle(false)}
-        // onMouseLeave={() => this.startDragToggle(false)}
-      >
-        {menu.map(({ type, content, onClick }) => (
-          <Popover
-            key={type}
-            placement="topLeft"
-            title=""
-            content={content}
-            trigger="hover"
-          >
-            <Button onClick={onClick} className={styles.button}>
-              <Icon type={type} />
-            </Button>
-          </Popover>
-        ))}
+      <Row id="menuList" {...this.props} className={styles.menu}>
+        <Button.Group>
+          {menu.map(({ type, content, onClick }) => (
+            <Popover
+              key={type}
+              placement="topLeft"
+              title=""
+              content={content}
+              trigger="hover"
+            >
+              <Button onClick={onClick} className={styles.button}>
+                <Icon type={type} />
+              </Button>
+            </Popover>
+          ))}
+        </Button.Group>
       </Row>
     );
   }
